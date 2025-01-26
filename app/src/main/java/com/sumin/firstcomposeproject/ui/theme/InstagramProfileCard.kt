@@ -2,6 +2,7 @@ package com.sumin.firstcomposeproject.ui.theme
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -45,8 +46,10 @@ fun InstagramProfileCard() {
         ) {
             Image(
                 modifier = Modifier
+                    .size(50.dp)
                     .clip(CircleShape)
-                    .size(50.dp),
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(4.dp),
                 painter = painterResource(R.drawable.ic_instagram),
                 contentDescription = "Instagram icon"
             )

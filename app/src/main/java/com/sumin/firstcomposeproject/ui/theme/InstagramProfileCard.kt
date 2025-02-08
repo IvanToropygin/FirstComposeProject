@@ -19,7 +19,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,14 +28,14 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sumin.firstcomposeproject.MainViewModel
+import com.sumin.firstcomposeproject.InstagramModel
 import com.sumin.firstcomposeproject.R
 
 @Composable
-fun InstagramProfileCard(mainViewModel: MainViewModel) {
-
-    val isFollowed = mainViewModel.isFollowing.observeAsState(false)
-
+fun InstagramProfileCard(
+    instagramModel: InstagramModel,
+    onFollowedButtonClickListener: (InstagramModel) -> Unit,
+) {
     Card(
         modifier = Modifier
             .padding(8.dp),
@@ -75,12 +74,12 @@ fun InstagramProfileCard(mainViewModel: MainViewModel) {
             Text(
                 fontSize = 32.sp,
                 fontFamily = FontFamily.Cursive,
-                text = "Instagram"
+                text = "Instagram ${instagramModel.id}"
             )
             Text(
                 fontSize = 14.sp,
                 fontStyle = FontStyle.Normal,
-                text = "#YoursToMake"
+                text = "#${instagramModel.title}"
             )
             Text(
                 fontSize = 14.sp,
@@ -88,9 +87,9 @@ fun InstagramProfileCard(mainViewModel: MainViewModel) {
                 text = "www.facebook.com/emotional_health"
             )
             FollowButton(
-                isFollowed = isFollowed.value
+                isFollowed = instagramModel.isFollowed
             ) {
-                mainViewModel.changeFollowingStatus()
+                onFollowedButtonClickListener(instagramModel)
             }
         }
     }
@@ -139,25 +138,3 @@ private fun UserStatistics(
         )
     }
 }
-
-//@Preview
-//@Composable
-//fun PreviewCardLight() {
-//    FirstComposeProjectTheme(
-//        dynamicColor = false,
-//        darkTheme = false
-//    ) {
-//        InstagramProfileCard()
-//    }
-//}
-//
-//@Preview
-//@Composable
-//fun PreviewCardDark() {
-//    FirstComposeProjectTheme(
-//        dynamicColor = false,
-//        darkTheme = true
-//    ) {
-//        InstagramProfileCard()
-//    }
-//}

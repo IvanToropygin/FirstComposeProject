@@ -29,4 +29,11 @@ class MainViewModel: ViewModel() {
         }
         _models.value = listToModify
     }
+
+    fun delete(instagramModel: InstagramModel) {
+        val listToModify = _models.value?.toMutableList() ?: mutableListOf()
+        listToModify.removeAll { it.id == instagramModel.id
+        }
+        _models.value = listToModify
+    }
 }
